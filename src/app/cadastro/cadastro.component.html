@@ -1,0 +1,47 @@
+<dp-toolbar></dp-toolbar>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-2">
+        <form [formGroup]="cadastroForm" (ngSubmit)="submit();">
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput placeholder="Digite seu e-mail" required formControlName="email">
+
+              <mat-error *ngIf="f.email.hasError('pattern')">
+                <strong>E-mail inválido.</strong>
+              </mat-error>
+              <mat-error *ngIf="f.email.hasError('required')">
+                <strong>Esse campo é de preenchimento obrigatório.</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput #password placeholder="Senha" type="password" formControlName="senha">
+              <mat-icon matSuffix>mode_edit</mat-icon>
+              <mat-error *ngIf="f.senha.hasError('required')">
+                  <strong>Esse campo é de preenchimento obrigatório.</strong>
+                </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput placeholder="Digite novamente a senha" type="password" formControlName="repetirSenha" dpEqualPassword="password">
+              <mat-icon matSuffix>mode_edit</mat-icon>
+
+              <mat-error *ngIf="f.repetirSenha.hasError('MatchPassword')">
+                Senhas
+                <strong>diferentes</strong>, por favor, digite o mesmo valor da senha acima.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <button type="submit" class="btn btn-primary float-right" [disabled]="cadastroForm.invalid">Cadastrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
